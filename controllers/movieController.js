@@ -30,10 +30,21 @@ function show(req, res) {
                 error: 'Nessun film trovato'
             });
         }
-        res.json({
-            success: true,
-            item
+        const sqlReviews =
+            `SELECT * FROM reviews
+            WHERE movie_id = ?`;
+        connection.query(sqlReviews, [id], (err, reviews) => {
+            console.log(results);
+            if (err) return res.status(500).json({
+                error: 'DB query failed'
+            });
+            item.reviews = reviews;
+            res.json({
+                success: true,
+                item
+            });
         });
+
     });
 }
 
