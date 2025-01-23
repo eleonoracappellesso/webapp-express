@@ -16,7 +16,25 @@ function index(req, res) {
 }
 
 function show(req, res) {
+    const id = parseInt(req.params.id);
+    const sql =
+        `SELECT * FROM movies WHERE movies.id = ?`
 
+    connection.query(sql, [id], (err, results) => {
+        if (err) return res.status(500).json({
+            error: 'DB query failed'
+        });
+        const item = results[0]; // il primo film si trova in indice 0
+        if (!item) {
+            return res.status(404).json({
+                error: 'Nessun film trovato'
+            });
+        }
+        res.json({
+            success: true,
+            item
+        });
+    });
 }
 
 function store(req, res) {
