@@ -18,8 +18,11 @@ function index(req, res) {
 function show(req, res) {
     const id = parseInt(req.params.id);
     const sql =
-        `SELECT * FROM movies WHERE movies.id = ?`
-
+        `SELECT movies.*, AVG(reviews.vote) AS vote_average 
+        FROM movies
+        JOIN reviews ON reviews.movie_id = movies.id
+        WHERE movies.id = ?
+        GROUP BY movies.id;`
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({
             error: 'DB query failed'
