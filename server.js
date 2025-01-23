@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 const errorsHandler = require("./middlewares/errorsHandles");
 const notFound = require("./middlewares/notFound");
 const corsPolicy = require("./middlewares/corsPolicy");
-const booksRouter = require("./routes/books");
+const moviesRouter = require("./routes/movies");
 
 app.use(express.static("public"));
 
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 //other routes
-app.use("/books", booksRouter);
+app.use("/movies", moviesRouter);
 
 app.use(errorsHandler);
 

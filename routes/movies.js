@@ -7,7 +7,7 @@ const {
   store,
   update,
   destroy,
-} = require("../controllers/bookController");
+} = require("../controllers/movieController");
 //Rotte
 
 // Index - Read all
