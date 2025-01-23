@@ -11,7 +11,7 @@ const notFound = require("./middlewares/notFound");
 const corsPolicy = require("./middlewares/corsPolicy");
 const moviesRouter = require("./routes/movies");
 
-app.use(express.static("public"));
+app.use("/images", express.static("public/images"));
 
 app.use(corsPolicy);
 

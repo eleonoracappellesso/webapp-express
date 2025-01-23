@@ -61,13 +61,11 @@ function update(req, res) {
 
 function destroy(req, res) {
     const id = parseInt(req.params.id);
-    const sql = 'DELETE FROM `movies` WHERE `id` = ?';
-    connection.query(sql, [id], (err, res) => {
-        if (err) return res.status(500).json({
-            error: 'DB query failed'
-        });
+    const sql = "DELETE FROM `movies` WHERE  `id` = ?";
+    connection.query(sql, [id], (err, results) => {
+        if (err) res.status(500).json({ error: "Errore del server" });
         res.sendStatus(204);
-    })
+    });
 }
 
 module.exports = { index, show, store, update, destroy };
