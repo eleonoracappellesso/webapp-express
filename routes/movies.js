@@ -5,6 +5,7 @@ const {
   index,
   show,
   store,
+  storeReview,
   update,
   destroy,
 } = require("../controllers/movieController");
@@ -18,6 +19,9 @@ router.get("/:id", show);
 
 //Store - Create
 router.post("/", store);
+
+//Store - Create review
+router.post("/:id/reviews", storeReview);
 
 //Update - Update  totale
 router.put("/:id", update);

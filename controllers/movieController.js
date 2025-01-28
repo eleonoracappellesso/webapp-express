@@ -55,6 +55,28 @@ function store(req, res) {
 
 }
 
+function storeReview(req, res) {
+    // Recuperiamo l'id
+    const { id } = req.params;
+
+    // Recuperiamo il body
+    const { text, name, vote } = req.body;
+
+    // Prepariamo la query
+    const sql =
+        "INSERT INTO reviews (text, name, vote, book_id) VALUES (?, ?, ?, ?)";
+
+    // Eseguiamo la query
+    //console.log(results); // results contains rows returned by server
+    //  console.log(fields); // fields contains extra meta data about results, if available
+    connection.query(sql, [text, name, vote, id], (err, results) => {
+        if (err) return res.status(500).json({ error: "Database query failed" });
+        //console.log(results);
+        res.status(201);
+        res.json({ message: "Review added", id: results.insertId });
+    });
+}
+
 function update(req, res) {
 
 }
@@ -68,4 +90,4 @@ function destroy(req, res) {
     });
 }
 
-module.exports = { index, show, store, update, destroy };
+module.exports = { index, show, store, storeReview, update, destroy };
