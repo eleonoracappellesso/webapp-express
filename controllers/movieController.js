@@ -56,6 +56,13 @@ function store(req, res) {
 }
 
 function storeReview(req, res) {
+
+    console.log("Dati ricevuti nel backend:", req.body);
+
+    if (!req.body || !req.body.text || !req.body.name || !req.body.vote) {
+        return res.status(400).json({ error: "Dati mancanti. Assicurati di inviare text, name e vote" });
+    }
+
     // Recuperiamo l'id
     const { id } = req.params;
 
@@ -64,7 +71,7 @@ function storeReview(req, res) {
 
     // Prepariamo la query
     const sql =
-        "INSERT INTO reviews (text, name, vote, book_id) VALUES (?, ?, ?, ?)";
+        "INSERT INTO reviews (text, name, vote, movie_id) VALUES (?, ?, ?, ?)";
 
     // Eseguiamo la query
     //console.log(results); // results contains rows returned by server

@@ -13,6 +13,9 @@ const moviesRouter = require("./routes/movies");
 
 app.use(express.static("public"));
 
+// Middleware per il parsing del corpo delle richieste JSON
+app.use(express.json());
+
 app.use(corsPolicy);
 
 app.get("/", (req, res) => {
